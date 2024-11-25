@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão</title>
+    <style>
+        @font-face {
+            font-family: 'Fira Code';
+            src: url('fonts/FiraCode-Medium.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #337045, #78c08e);
+            overflow: hidden;
+            color: white;
+            font-family: "Fira Code";
+        }
+
+        .questao-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .enunciado {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #245826;
+        }
+
+        .comando {
+            font-size: 0.9em;
+            color: #367938;
+            margin-bottom: 15px;
+        }
+
+        .alternativas {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .alternativa {
+            padding: 10px;
+            border: 2px solid #245826;
+            border-radius: 5px;
+            background-color: #4fa152;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+        }
+
+        .alternativa:hover {
+            background-color: #4caf50;
+            color: white;
+            transform: scale(1.05);
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="questao-container">
+        <h3 class="enunciado">Qual é o principal objetivo do desenvolvimento sustentável?</h3>
+        <div class="comando">Selecione uma das alternativas abaixo:</div>
+
+        <form action="" method="POST" class="form-questao">
+            <div class="alternativas">
+                <div class="alternativa">Garantir crescimento econômico ilimitado.</div>
+                <div class="alternativa">Preservar recursos naturais para as gerações futuras.</div>
+                <div class="alternativa">Evitar o uso de tecnologias renováveis.</div>
+                <div class="alternativa">Eliminar o consumo de recursos naturais.</div>
+            </div>
+            <input type="hidden" name="questao">
+        </form>
+    </div>
+
+    <script>
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let time = 0;
+
+        document.body.addEventListener("mousemove", (event) => {
+            mouseX = event.clientX / window.innerWidth;
+            mouseY = event.clientY / window.innerHeight;
+        });
+
+        function animateBackground() {
+            time += 0.04;
+
+            const r1 = Math.round(51 + (120 - 51) * (Math.sin(time + mouseX) * 0.5 + 0.5));
+            const g1 = Math.round(112 + (192 - 112) * (Math.sin(time + mouseY) * 0.5 + 0.5));
+            const b1 = Math.round(69 + (142 - 69) * (Math.cos(time + mouseX) * 0.5 + 0.5));
+
+            const r2 = Math.round(51 + (120 - 51) * (Math.cos(time + mouseY) * 0.5 + 0.5));
+            const g2 = Math.round(112 + (192 - 112) * (Math.cos(time + mouseX) * 0.5 + 0.5));
+            const b2 = Math.round(69 + (142 - 69) * (Math.sin(time + mouseY) * 0.5 + 0.5));
+
+            const color1 = `rgb(${r1}, ${g1}, ${b1})`;
+            const color2 = `rgb(${r2}, ${g2}, ${b2})`;
+
+            document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+
+            requestAnimationFrame(animateBackground);
+        }
+
+        animateBackground();
+    </script>
+</body>
+
+</html>

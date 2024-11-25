@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <style>
+        @font-face {
+            font-family: 'Fira Code';
+            src: url('fonts/FiraCode-Medium.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            font-family: Arial, sans-serif;
+            color: white;
+            overflow: hidden;
+            background: url("imgs/fundogif.gif") no-repeat center center;
+            background-size: cover;
+            font-family: "Fira Code";
+        }
+
+        h1 {
+            font-size: 3rem;
+            text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.7);
+            margin-bottom: 20px;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .button {
+            width: 150px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .button:hover {
+            background-color: #4caf50;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>EcoQuiz</h1>
+    <div class="buttons">
+        <div class="button">Jogar</div>
+        <div class="button">Ranking</div>
+    </div>
+</body>
+
+</html>
