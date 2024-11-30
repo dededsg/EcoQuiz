@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ranking</title>
+    <style>
+        @font-face {
+            font-family: 'Fira Code';
+            src: url('fonts/FiraCode-Medium.ttf') format('truetype');
+        }
+
+        img {
+            float: left;
+            transition: 500ms;
+        }
+
+        img:hover{
+            transform: scale(1.2,1.2);
+            transition: 500ms;
+            cursor: pointer;
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #337045, #78c08e);
+            font-family: 'Fira Code';
+            color: white;
+            overflow: hidden;
+        }
+
+        .ranking-container {
+            width: 90%;
+            max-width: 600px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+        }
+
+        .title-table {
+            font-size: 2rem;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            margin-top: 50px;
+        }
+
+        .ranking-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background-color: #245826;
+            margin-bottom: 10px;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: transform 0.2s ease-in-out;
+        }
+
+        .ranking-item:hover {
+            transform: scale(1.03);
+            background-color: #367938;
+        }
+
+        .ranking-item img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .ranking-info {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .ranking-position {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .ranking-username {
+            font-size: 1rem;
+            color: #b2d8b9;
+        }
+
+        .ranking-score {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #4caf50;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="ranking-container">
+        <a href="index.html">
+            <img src="imgs/icon-home.png" alt="Ícone de Casa">
+        </a>
+        <h2 class="title-table">Ranking</h2>
+        <div class="ranking-item">
+            <div class="ranking-info">
+                <span class="ranking-position">1</span>
+                <span class="ranking-username">Arthur Bauer Cardoso</span>
+            </div>
+            <span class="ranking-score">1000000000</span>
+        </div>
+        <div class="ranking-item">
+            <div class="ranking-info">
+                <span class="ranking-position">2</span>
+                <span class="ranking-username">Develin Merdinha</span>
+            </div>
+            <span class="ranking-score">-1,621</span>
+        </div>
+    </div>
+</body>
+
+</html>

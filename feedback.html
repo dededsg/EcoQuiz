@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão</title>
+    <style>
+        @font-face {
+            font-family: 'Fira Code';
+            src: url('fonts/FiraCode-Medium.ttf') format('truetype');
+        }
+
+        body {
+            margin: 0;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #337045, #78c08e);
+            overflow: hidden;
+            color: white;
+            font-family: "Fira Code";
+        }
+
+        .feedback-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 600px;
+            margin: 20px;
+        }
+
+        .enunciado-verdadeiro {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #245826;
+        }
+
+        .enunciado-falso {
+            margin-bottom: 10px;
+            font-size: 1.2em;
+            color: #991e1e;
+        }
+
+        .explicação {
+            font-size: 1em;
+            color: #000000;
+        }
+        .buttons {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .button {
+            width: 150px;
+            padding: 15px;
+            text-align: center;
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: white;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            transition: background-color 0.3s ease, transform 0.2s ease;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
+            
+        }
+        
+        a{
+            text-decoration: none;
+        }
+
+        .button:hover {
+            background-color: #4caf50;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+
+<body>
+    <?php if (acertou == true): ?>
+    <h3 class="enunciado-verdadeiro">Você acertou!!! :)</h3>
+    <?php elseif (acertou == false): ?>
+    <h3 class="enunciado-falso">Não foi dessa vez :(</h3>
+   
+
+    <?php if (!empty($explicacao)): ?>
+    <p class="explicacao">
+        <?php echo htmlspecialchars($explicacao); ?>
+    </p>
+    <?php endif; ?>
+
+    <div class="buttons">
+        <a href="questao.html"><div class="button">Jogar</div></a>
+        <a href="ranking.html"><div class="button">Ranking</div></a>
+    </div>
+    </div>
+
+    <script>
+        let mouseX = 0.5;
+        let mouseY = 0.5;
+        let time = 0;
+
+        document.body.addEventListener("mousemove", (event) => {
+            mouseX = event.clientX / window.innerWidth;
+            mouseY = event.clientY / window.innerHeight;
+        });
+
+        function animateBackground() {
+            time += 0.04;
+
+            const r1 = Math.round(51 + (120 - 51) * (Math.sin(time + mouseX) * 0.5 + 0.5));
+            const g1 = Math.round(112 + (192 - 112) * (Math.sin(time + mouseY) * 0.5 + 0.5));
+            const b1 = Math.round(69 + (142 - 69) * (Math.cos(time + mouseX) * 0.5 + 0.5));
+
+            const r2 = Math.round(51 + (120 - 51) * (Math.cos(time + mouseY) * 0.5 + 0.5));
+            const g2 = Math.round(112 + (192 - 112) * (Math.cos(time + mouseX) * 0.5 + 0.5));
+            const b2 = Math.round(69 + (142 - 69) * (Math.sin(time + mouseY) * 0.5 + 0.5));
+
+            const color1 = `rgb(${r1}, ${g1}, ${b1})`;
+            const color2 = `rgb(${r2}, ${g2}, ${b2})`;
+
+            document.body.style.background = `linear-gradient(135deg, ${color1}, ${color2})`;
+
+            requestAnimationFrame(animateBackground);
+        }
+
+        animateBackground();
+    </script>
+</body>
+
+</html>
