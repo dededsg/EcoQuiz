@@ -49,6 +49,7 @@
             font-size: 1em;
             color: #000000;
         }
+
         .buttons {
             display: flex;
             gap: 20px;
@@ -68,10 +69,10 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
             cursor: pointer;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.5);
-            
+
         }
-        
-        a{
+
+        a {
             text-decoration: none;
         }
 
@@ -83,22 +84,27 @@
 </head>
 
 <body>
-    <?php if (acertou == true): ?>
-    <h3 class="enunciado-verdadeiro">Você acertou!!! :)</h3>
-    <?php elseif (acertou == false): ?>
-    <h3 class="enunciado-falso">Não foi dessa vez :(</h3>
-   
+    <div class="feedback-container">
+        <?php if (acertou == true): ?>
+        <h3 class="enunciado-verdadeiro">Você acertou!!! :)</h3>
+        <?php elseif (acertou == false): ?>
+        <h3 class="enunciado-falso">Não foi dessa vez :(</h3>
 
-    <?php if (!empty($explicacao)): ?>
-    <p class="explicacao">
-        <?php echo htmlspecialchars($explicacao); ?>
-    </p>
-    <?php endif; ?>
 
-    <div class="buttons">
-        <a href="questao.html"><div class="button">Jogar</div></a>
-        <a href="ranking.html"><div class="button">Ranking</div></a>
-    </div>
+        <?php if (!empty($explicacao)): ?>
+        <p class="explicacao">
+            <?php echo htmlspecialchars($explicacao); ?>
+        </p>
+        <?php endif; ?>
+
+        <div class="buttons">
+            <a href="questao.html">
+                <div class="button">Jogar</div>
+            </a>
+            <a href="ranking.html">
+                <div class="button">Ranking</div>
+            </a>
+        </div>
     </div>
 
     <script>
