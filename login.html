@@ -168,17 +168,17 @@
     </label>
     <div class="login">
       <h1>EcoQuiz</h1>
-      <form action="#">
+      <form action="verificaLogin.php" method="POST">
         <p>
           <label for="user">Usuário</label>
-          <input type="text">
+          <input type="text" name="nome">
         </p>
         <p>
           <label for="pass">Matrícula</label>
-          <input type="password">
+          <input type="number" name="matricula">
         </p>
         <p>
-          <input type="submit" value="Login">
+          <input type="submit"  name="submit">
         </p>
 
       </form>

@@ -1,3 +1,29 @@
+<?php
+session_start();
+include_once('conexao.php');
+
+if (isset($_SESSION['id'])) {
+    $idUsuario = $_SESSION['id'];
+
+    $sql = "SELECT id FROM usuario WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $stmt->store_result();
+
+    if ($stmt->num_rows == 0) {
+        header("Location: login.html");
+        exit();
+    }
+
+    $stmt->close();
+} else {
+    header("Location: login.html");
+    exit();
+}
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +42,8 @@
             transition: 500ms;
         }
 
-        img:hover{
-            transform: scale(1.2,1.2);
+        img:hover {
+            transform: scale(1.2, 1.2);
             transition: 500ms;
             cursor: pointer;
         }
@@ -102,24 +128,60 @@
 
 <body>
     <div class="ranking-container">
-        <a href="index.html">
+        <a href="index.php">
             <img src="imgs/icon-home.png" alt="Ícone de Casa">
         </a>
         <h2 class="title-table">Ranking</h2>
-        <div class="ranking-item">
-            <div class="ranking-info">
-                <span class="ranking-position">1</span>
-                <span class="ranking-username">Arthur Bauer Cardoso</span>
-            </div>
-            <span class="ranking-score">1000000000</span>
-        </div>
-        <div class="ranking-item">
-            <div class="ranking-info">
-                <span class="ranking-position">2</span>
-                <span class="ranking-username">Develin Merdinha</span>
-            </div>
-            <span class="ranking-score">-1,621</span>
-        </div>
+
+        <?php
+
+        // Consulta para obter o ranking dos usuários
+        $sql = "SELECT id_usuario, ponto FROM ranking ORDER BY ponto DESC";
+        $result = $conn->query($sql);
+
+        if ($result->num_rows > 0) {
+            $posicao = 1;
+            while ($row = $result->fetch_assoc()) {
+                $idUsuario = $row['id_usuario'];
+                $pontos = $row['ponto'];
+
+                // Consulta para obter o nome do usuário
+                $sqlUser = "SELECT nome FROM usuario WHERE id = ?";
+                $stmtUser = $conn->prepare($sqlUser);
+                $stmtUser->bind_param("i", $idUsuario);
+                $stmtUser->execute();
+                $stmtUser->bind_result($nomeUsuario);
+                $stmtUser->fetch();
+                $stmtUser->close();
+        ?>
+                <div class="ranking-item">
+                    <div class="ranking-info">
+                        <span class="ranking-position">
+                            <?php echo $posicao; ?>
+                        </span>
+                        <span class="ranking-username">
+                            <?php echo htmlspecialchars($nomeUsuario); ?>
+                        </span>
+
+                        <?php 
+                        if ($posicao == 1) {
+                            echo '<img src="imgs/ouro.png" alt="Medalha Ouro">';
+                        } elseif ($posicao == 2) {
+                            echo '<img src="imgs/prata.png" alt="Medalha Prata">';
+                        } elseif ($posicao == 3) {
+                            echo '<img src="imgs/bronze.png" alt="Medalha Bronze">';
+                        }
+                        ?>
+                    </div>
+                    <span class="ranking-score"><?php echo $pontos; ?></span>
+                </div>
+        <?php
+                $posicao++;
+            }
+        } else {
+            echo "Nenhum ranking encontrado.";
+        }
+        ?>
     </div>
 </body>
 

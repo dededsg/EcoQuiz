@@ -1,3 +1,36 @@
+<?php
+session_start();
+include_once('conexao.php'); // Inclua a conexão com o banco de dados
+
+// Verifica se a sessão está ativa
+if (isset($_SESSION['id'])) {
+    $idUsuario = $_SESSION['id'];
+
+    // Verifica se o usuário existe no banco de dados
+    $sql = "SELECT id FROM usuario WHERE id = ?";
+    $stmt = $conn->prepare($sql);
+    $stmt->bind_param("i", $idUsuario);
+    $stmt->execute();
+    $stmt->store_result();
+
+    // Se não encontrar o usuário no banco, redireciona para o login
+    if ($stmt->num_rows == 0) {
+        header("Location: login.html");
+        exit();
+    }
+
+    $stmt->close();
+} else {
+    // Se não houver sessão, redireciona para o login
+    header("Location: login.html");
+    exit();
+}
+
+$conn->close();
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -99,10 +132,10 @@
     </div>
 
     <div class="buttons">
-        <a href="questao.html"><div class="button">Jogar</div></a>
-        <a href="ranking.html"><div class="button">Ranking</div></a>
+        <a href="questao.php"><div class="button">Jogar</div></a>
+        <a href="ranking.php"><div class="button">Ranking</div></a>
     </div>
-    <div class="button-sair">Sair</div>
+    <div class="button-sair" onclick="window.location.href='sair.php';">Sair</div>
 </body>
 
 </html>
