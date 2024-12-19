@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questão</title>
+    <style>
+        /* Seu estilo aqui */
+    </style>
+</head>
+
+<body>
+    <div class="questao-container">
+        <h3 class="enunciado">{{ questao.enunciado }}</h3>
+
+        <form action="{% url 'verifica_questao' %}" method="POST">
+            {% csrf_token %}
+            <div class="alternativa">
+                <label class="alternativa-f">
+                    <input type="radio" name="quiz" value="1" required>
+                    <span>{{ questao.q1 }}</span>
+                </label>
+                <label class="alternativa-f">
+                    <input type="radio" name="quiz" value="2" required>
+                    <span>{{ questao.q2 }}</span>
+                </label>
+                <label class="alternativa-f">
+                    <input type="radio" name="quiz" value="3" required>
+                    <span>{{ questao.q3 }}</span>
+                </label>
+                <label class="alternativa-f">
+                    <input type="radio" name="quiz" value="4" required>
+                    <span>{{ questao.q4 }}</span>
+                </label>
+            </div>
+
+            <input type="hidden" name="resposta" value="{{ questao.resposta }}">
+            <input type="hidden" name="explicacao" value="{{ questao.explicacao }}">
+
+            <button type="submit">Enviar</button>
+        </form>
+    </div>
+</body>
+
+</html>
